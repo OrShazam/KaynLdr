@@ -129,7 +129,7 @@ VOID KReAllocSections( LPVOID KaynImage, ULONGLONG ImageBase, UINT_PTR BaseReloc
                     *(PDWORD32)( Rel ) += (DWORD32)OffsetIB;
                     break;
             }
-            ++pImageBR;
+            ++pImageR;
         };
         pImageBR = (PIMAGE_BASE_RELOCATION)pImageR;
     }
@@ -174,7 +174,7 @@ DWORD KHashString( PVOID String, SIZE_T Length )
 SIZE_T KStringLengthA( LPCSTR String )
 {
     LPCSTR String2 = String;
-    for (String2 = String; *String2; ++String2);
+    for (; *String2; ++String2);
     return (String2 - String);
 }
 
