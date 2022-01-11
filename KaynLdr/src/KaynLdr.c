@@ -110,11 +110,12 @@ DLLEXPORT VOID KaynLoader( LPVOID lpParameter )
         // ----------------------------------------
         // 4. Process all of our images relocations
         // ----------------------------------------
+        pImageDir       = RVA_2_VA( LPVOID, KVirtualMemory, pImageNtHeaders->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_BASE_RELOC].VirtualAddress );
 
         KReAllocSections(
                 KVirtualMemory,
                 pImageNtHeaders->OptionalHeader.ImageBase,
-                (UINT_PTR)KVirtualMemory + ((PIMAGE_DATA_DIRECTORY)pImageDir)->VirtualAddress
+                pImageDir
         );
 
         KaynDllMain =  (KAYNDLLMAIN)((UINT_PTR)KVirtualMemory + (UINT_PTR)pImageNtHeaders->OptionalHeader.AddressOfEntryPoint);
